@@ -3,10 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import DemoCreatePortal from './component/DemoCreatePortal';
 import DemoRef from './component/DemoRef';
+import ThemeProvider from './context/ThemeProvider';
+import MyTheme from './component/MyTheme';
 
 function App() {
 
   const [showModal, setShowModal] =  useState(false);
+
+  const [theme, changeTheme] = useState('black');
 
   const closeModal = () => {
     setShowModal(false);
@@ -22,17 +26,14 @@ function App() {
         <button onClick={openModal}> Show Modal </button>
         {showModal && <DemoCreatePortal handleCloseModal={closeModal}> Noi dung modal </DemoCreatePortal>}
         <DemoRef />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ThemeProvider value={
+          {
+            theme,
+            changeTheme,
+          }
+        }>
+          <MyTheme />
+        </ThemeProvider>
       </header>
     </div>
   );
